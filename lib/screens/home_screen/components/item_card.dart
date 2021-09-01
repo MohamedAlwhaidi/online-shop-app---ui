@@ -40,9 +40,9 @@ class ItemCard extends StatelessWidget {
             text: TextSpan(
               text: product.title + '\n',
               style: TextStyle(color: kTextColor),
-              children: const <TextSpan>[
+              children:  <TextSpan>[
                 TextSpan(
-                    text: '\$${234}',
+                    text: '\$${product.price}',
                     style: TextStyle(fontWeight: FontWeight.bold)),
               ],
             ),
