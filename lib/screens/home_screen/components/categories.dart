@@ -1,43 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:online_shop_app/provider/categories_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constants.dart';
 
 class Categories extends StatefulWidget {
-
   @override
   _CategoriesState createState() => _CategoriesState();
 }
 
 class _CategoriesState extends State<Categories> {
-  List<String> _categories = [
-    "Hand bag",
-    "Jewellery",
-    "Footwear",
-    "Dresses",
-    "Bag"
-  ];
-  int _selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: kDefaultPadding),
-      child: SizedBox(
-        height: 25,
-        child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: _categories.length,
-            itemBuilder: (context, index) => buildCategories(index)),
-      ),
+    return Consumer<CategoriesProvider>(
+      builder: (context, categoriesData, child) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: kDefaultPadding),
+          child: SizedBox(
+            height: 25,
+            child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: categoriesData.categoryCount,
+                itemBuilder: (context, index) =>
+                    buildCategories(index, categoriesData)),
+          ),
+        );
+      },
     );
   }
 
-  Widget buildCategories(int index) {
+  Widget buildCategories(int index, CategoriesProvider categoriesData) {
     return GestureDetector(
       onTap: () {
-        setState(() {
-          _selectedIndex = index;
-        });
+        categoriesData.updateSelectedIndex(index);
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
@@ -45,9 +40,11 @@ class _CategoriesState extends State<Categories> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              _categories[index],
+              categoriesData.categories[index],
               style: TextStyle(
-                color: _selectedIndex == index ? kTextColor : kTextLightColor,
+                color: categoriesData.selectedIndex == index
+                    ? kTextColor
+                    : kTextLightColor,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -56,8 +53,9 @@ class _CategoriesState extends State<Categories> {
               height: 2,
               width: 30,
               decoration: BoxDecoration(
-                color:
-                    _selectedIndex == index ? Colors.black : Colors.transparent,
+                color: categoriesData.selectedIndex == index
+                    ? Colors.black
+                    : Colors.transparent,
               ),
             ),
           ],

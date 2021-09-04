@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:online_shop_app/models/product_data.dart';
+import 'package:online_shop_app/provider/product_provider.dart';
 import 'package:online_shop_app/screens/details_screen/details_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -9,7 +9,7 @@ import 'item_card.dart';
 class ProductList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Consumer<ProductData>(
+    return Consumer<ProductProvider>(
       builder: (context, productData, child) {
         return GridView.builder(
           padding: EdgeInsets.all(kDefaultPadding),
@@ -19,9 +19,9 @@ class ProductList extends StatelessWidget {
             childAspectRatio: 0.75,
             crossAxisCount: 2,
           ),
-          itemCount: Provider.of<ProductData>(context).productCount,
+          itemCount:productData.productCount,
           itemBuilder: (context, index) {
-            final product = Provider.of<ProductData>(context).products[index];
+            final product =productData.products[index];
             return ItemCard(
               product: product,
               press: () {

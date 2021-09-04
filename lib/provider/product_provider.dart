@@ -1,11 +1,10 @@
 import 'dart:collection';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:online_shop_app/models/product.dart';
 
-import 'package:flutter/foundation.dart';
-
-class ProductData extends ChangeNotifier {
+class ProductProvider extends ChangeNotifier {
   List<Product> _products = [
     Product(
         id: 1,
@@ -51,9 +50,8 @@ class ProductData extends ChangeNotifier {
       color: Color(0xFFAEAEAE),
     ),
   ];
+
   UnmodifiableListView<Product> get products => UnmodifiableListView(_products);
 
   int get productCount => _products.length;
-
-
 }

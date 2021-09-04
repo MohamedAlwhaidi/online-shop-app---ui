@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:online_shop_app/constants.dart';
-import 'package:online_shop_app/models/product_data.dart';
+import 'package:online_shop_app/provider/categories_provider.dart';
+import 'package:online_shop_app/provider/product_provider.dart';
 import 'package:online_shop_app/screens/home_screen/home_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => ProductData(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ProductProvider()),
+        ChangeNotifierProvider(create: (_) => CategoriesProvider()),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Shopp App",

@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:online_shop_app/constants.dart';
-import 'package:online_shop_app/models/product_data.dart';
-import 'package:online_shop_app/screens/details_screen/details_screen.dart';
 import 'package:online_shop_app/screens/home_screen/components/categories.dart';
-import 'package:online_shop_app/screens/home_screen/components/item_card.dart';
 import 'package:online_shop_app/screens/home_screen/components/product_list.dart';
-import 'package:provider/provider.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -32,4 +28,3 @@ class Body extends StatelessWidget {
     );
   }
 }
-
